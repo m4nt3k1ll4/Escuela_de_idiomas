@@ -1,0 +1,45 @@
+<!-- Login Form -->
+<section class="login-container">
+  <header>
+    <h1>Login</h1>
+  </header>
+  <form [formGroup]="authForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" required placeholder="Enter your email" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" placeholder="Enter your password" required />
+    </div>
+    <div class="button-container">
+      <button type="submit" class="login-button">Login</button>
+      <button type="button" class="register-buttona" (click)="initRegister()">Register</button>
+    </div>
+  </form>
+</section>
+
+<!-- Register Form -->
+<section class="register-container" *ngIf="showForm">
+  <header>
+    <h1>Register</h1>
+  </header>
+  <form [formGroup]="myForm" (ngSubmit)="formSubmitRegister(myForm)">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" placeholder="Enter your name" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" placeholder="Enter your email" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" placeholder="Enter your password" />
+    </div>
+    <div class="button-container">
+      <button type="submit" class="create-button">Register</button>
+      <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</section>

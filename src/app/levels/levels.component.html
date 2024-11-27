@@ -1,0 +1,53 @@
+<header>
+  <h1>Level Management</h1>
+</header>
+
+<button class="create-button" (click)="initLevel()">Add New Level</button>
+
+<section class="form-container" *ngIf="showForm">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmitLevel(myForm)">
+    <div>
+      <label>
+        Level Name:
+        <input formControlName="name" placeholder="Enter level name" />
+      </label>
+    </div>
+    <div>
+      <label>
+        Language ID:
+        <input formControlName="language_id" type="number" placeholder="Enter language ID" />
+      </label>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="create-button">
+        {{ myForm.value.id ? 'Update' : 'Add' }}
+      </button>
+      <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</section>
+
+<!-- Table to display levels -->
+<section *ngIf="!showForm">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Level Name</th>
+        <th>Language ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let level of array">
+        <td>{{ level.id }}</td>
+        <td>{{ level.name }}</td>
+        <td>{{ level.language_id }}</td>
+        <td>
+          <button class="update-button" (click)="updateLevel(level)">Edit</button>
+          <button class="delete-button" (click)="deleteLevel(level.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

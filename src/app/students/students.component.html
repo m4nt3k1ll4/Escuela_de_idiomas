@@ -1,0 +1,101 @@
+<header>
+  <h1>Student Management</h1>
+</header>
+
+<!-- Button to add a new student -->
+<button class="create-button" (click)="initStudent()">Add New Student</button>
+
+<!-- Form to add/edit a student -->
+<section class="form-container" *ngIf="showForm">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmitStudent(myForm)">
+    <div>
+      <label>
+        Name:
+        <input formControlName="name" placeholder="Enter student name" />
+      </label>
+    </div>
+    <div>
+      <label>
+        Email:
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="Enter student email"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Phone:
+        <input
+          formControlName="phone"
+          type="tel"
+          placeholder="Enter student phone"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Level ID:
+        <input
+          formControlName="level_id"
+          type="number"
+          placeholder="Enter level ID"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Courses:
+        <input formControlName="courses" placeholder="Enter courses" />
+      </label>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="create-button">
+        {{ myForm.value.id ? "Update" : "Add" }}
+      </button>
+      <button type="button" class="cancel-button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- Table to display students -->
+<section *ngIf="!showForm">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Level ID</th>
+        <th>Courses</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of array">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.level_id }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let course of student.courses">{{ course.name }}</li>
+          </ul>
+        </td>
+        <td>
+          <button class="update-button" (click)="updateStudent(student)">
+            Edit
+          </button>
+          <button class="delete-button" (click)="deleteStudent(student.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

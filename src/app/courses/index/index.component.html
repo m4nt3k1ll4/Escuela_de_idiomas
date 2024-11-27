@@ -1,0 +1,55 @@
+<header>
+  <h1>Courses</h1>
+</header>
+<!-- Creation Formulary -->
+<button class="create-button" (click)="initCourse()">Create Course</button>
+<section class="form-container" *ngIf="showForm">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmitCourse(myForm)">
+    <div>
+      <label>
+        Name:
+        <input formControlName="name" placeholder="Course Name" />
+      </label>
+    </div>
+    <div>
+      <label>
+        Level id:
+        <input formControlName="level_id" type="number" placeholder="level" />
+      </label>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="create-button">Send</button>
+      <button type="button" class="cancel-button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</section>
+<!-- Courses Table -->
+<section *ngIf="!showForm">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Level Id</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of array">
+        <td>{{ course.id }}</td>
+        <td>{{ course.name }}</td>
+        <td>{{ course.level_id }}</td>
+        <td>
+          <button class="delete-button" (click)="deleteCourse(course.id)">
+            Delete
+          </button>
+          <button class="update-button" (click)="updateCourse(course)">
+            Update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,47 @@
+<header>
+  <h1>Language Management</h1>
+</header>
+<!-- Form to add/edit a language -->
+<button class="create-button" (click)="initLanguage()">Add New Language</button>
+<section class="form-container" *ngIf="showForm">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmitLanguage(myForm)">
+    <div>
+      <label>
+        Name:
+        <input formControlName="name" placeholder="Enter language name" />
+      </label>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="create-button">Add</button>
+      <button type="button" class="cancel-button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</section>
+<!-- Table to display languages -->
+<section *ngIf="!showForm">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let language of array">
+        <td>{{ language.id }}</td>
+        <td>{{ language.name }}</td>
+        <td>
+          <button class="update-button" (click)="updateLanguage(language)">
+            Edit
+          </button>
+          <button class="delete-button" (click)="deleteLanguage(language.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
